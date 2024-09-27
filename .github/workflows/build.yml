@@ -20,3 +20,7 @@ jobs:
         run: |
           echo "Changed files:"
           echo "${{ steps.changed-files.outputs.all_changed_and_modified_files }}"
+          for file in ${{steps.changed-files.outputs.all_changed_and_modified_files}}
+          do
+            FILE_PATH=$(echo $file | cut -d'/' -f2)
+            echo $FILE_PATH
