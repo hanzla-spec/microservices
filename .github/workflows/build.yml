@@ -24,7 +24,7 @@ jobs:
       - name: Run Python script
         id: run_script
         run: |
-
+          ls
           output=$(python3 ./script.py "${{steps.changed-files.outputs.all_changed_and_modified_files}}")
           echo "result=$output" >> $GITHUB_ENV
           echo ${{env.result}}
