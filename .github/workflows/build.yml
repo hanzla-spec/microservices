@@ -19,4 +19,4 @@ jobs:
       - name: Display Changed Files
         run: |
           echo "Changed files:"
-          echo "${{ steps.changed-files.outputs }}"
+          echo "${{ steps.changed-files.outputs.all }}"
