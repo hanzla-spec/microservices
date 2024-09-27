@@ -19,7 +19,7 @@ jobs:
       - name: Display Changed Files
         run: |
           echo "Changed files:"
-          echo "${{ steps.changed-files.outputs }}"
+          echo "${{ toJson(steps.changed-files.outputs) }}"
           for file in ${{steps.changed-files.outputs.all_changed_and_modified_files}}
           do
             FILE_PATH=$(echo $file | cut -d'/' -f2)
