@@ -16,6 +16,11 @@ jobs:
         id: changed-files
         uses: tj-actions/changed-files@v45.0.2
 
+      - name: Debug Output
+        run: |
+          echo "Full Output:"
+          echo "${{ toJson(steps.changed-files.outputs) }}"
+
       - name: Display Changed Files
         run: |
           echo "Changed files:"
