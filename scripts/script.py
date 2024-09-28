@@ -15,6 +15,8 @@ for e in items:
     else:
         res.append(e.split('/')[0])
 
-print(list(set(res))[0])
+if not len(res):
+    print('global')
+print(list(set(res)))
 
 
