@@ -38,7 +38,7 @@ jobs:
         run: |
           # Get the latest commit message
           COMMIT_MESSAGE=$(git log -1 --pretty=%B)
-
+          echo $COMMIT_MESSAGE
           # Check for keywords and set labels accordingly
           if [[ "$COMMIT_MESSAGE" == *"[POC]"* ]]; then
             LABEL="POC"

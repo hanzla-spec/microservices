@@ -19,5 +19,3 @@ if not len(res):
     print('global')
 else:
     print(list(set(res)))
-
-
