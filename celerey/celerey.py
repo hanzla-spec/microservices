@@ -1,1 +1,1 @@
-print('celrey..')
+print('celrey')
