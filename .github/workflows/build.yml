@@ -25,8 +25,6 @@ jobs:
         id: run_script
         run: |
           ls
-          echo "object..."
-          echo ${{ toJson(steps.changed-files.outputs) }}
           echo "run script..."
           output=$(python3 scripts/script.py "${{steps.changed-files.outputs.all_changed_and_modified_files}}")
           echo "output..."
