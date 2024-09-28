@@ -31,4 +31,4 @@ jobs:
           echo $output
           echo "result=$output" >> $GITHUB_ENV
           echo "final output:"
-          echo ${{ env.result }}
+          echo "${{ env.result }}"
