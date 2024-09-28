@@ -10,7 +10,7 @@ items = input_string.split(' ')
 res= []
 
 for e in items:
-    if e.startswith('.'):
+    if e.startswith('.') or e.startswith('scripts'):
         continue
     else:
         res.append(e.split('/')[0])
