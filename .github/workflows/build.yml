@@ -26,7 +26,7 @@ jobs:
         run: |
           ls
           echo ${{ toJson(steps.changed-files.outputs)}}
-          # output=$(python3 scripts/script.py "${{steps.changed-files.outputs.all_changed_and_modified_files}}")
-          # echo $output
+          output=$(python3 scripts/script.py "${{steps.changed-files.outputs.all_changed_and_modified_files}}")
+          echo $output
           # echo "result=$output" >> $GITHUB_ENV
           # echo ${{env.result}}

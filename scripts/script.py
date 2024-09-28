@@ -1,16 +1,20 @@
 import sys
 
 if len(sys.argv) != 2:
-    print("Usage: python process_list.py 'value1,value2,value3,...'")
+    print("Usage should be: python scripts/script.py 'value1,value2,value3,...'")
     sys.exit(1)
 
 input_string = sys.argv[1]
-items = input_string.split(',')
+items = input_string.split(' ')
 
-# Get unique first values
-unique_items = sorted(set(items))
-if unique_items:
-    unique_items=unique_items[0]
+res= []
 
-# Output the result as a newline-separated string
-print("\n".join(unique_items))
+for e in items:
+    if e.startswith('.'):
+        continue
+    else:
+        res.append(e.split('/')[0])
+
+print(list(set(res))[0])
+
+
