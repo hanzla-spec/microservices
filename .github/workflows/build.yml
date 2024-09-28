@@ -33,3 +33,23 @@ jobs:
       - name: Print the stored output
         run: |
           echo "final output: ${{ env.result }}"
+      
+      - name: Set labels based on commit messages
+        run: |
+          # Get the latest commit message
+          COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+
+          # Check for keywords and set labels accordingly
+          if [[ "$COMMIT_MESSAGE" == *"[POC]"* ]]; then
+            LABEL="POC"
+          elif [[ "$COMMIT_MESSAGE" == *"[DEV]"* ]]; then
+            LABEL="DEV"
+          elif [[ "$COMMIT_MESSAGE" == *"[PROD]"* ]]; then
+            LABEL="PROD"
+          else
+            LABEL=""
+          fi
+
+      - name: Echo environment
+        run: 
+          echo $LABEL
