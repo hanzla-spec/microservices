@@ -30,5 +30,6 @@ jobs:
           echo "output..."
           echo $output
           echo "result=$output" >> $GITHUB_ENV
-          echo "final output:"
-          echo "${{ env.result }}"
+      - name: Print the stored output
+        run: |
+          echo "final output: ${{ env.result }}"
