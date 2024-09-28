@@ -17,6 +17,7 @@ for e in items:
 
 if not len(res):
     print('global')
-print(list(set(res)))
+else:
+    print(list(set(res)))
 
 
