@@ -40,11 +40,11 @@ jobs:
           COMMIT_MESSAGE=$(git log -1 --pretty=%B)
           echo $COMMIT_MESSAGE
           # Check for keywords and set labels accordingly
-          if [[ "$COMMIT_MESSAGE" == *"[POC]"* ]]; then
+          if [[ $COMMIT_MESSAGE == *"[POC]"* ]]; then
             LABEL="POC"
-          elif [[ "$COMMIT_MESSAGE" == *"[DEV]"* ]]; then
+          elif [[ $COMMIT_MESSAGE == *"[DEV]"* ]]; then
             LABEL="DEV"
-          elif [[ "$COMMIT_MESSAGE" == *"[PROD]"* ]]; then
+          elif [[ $COMMIT_MESSAGE == *"[PROD]"* ]]; then
             LABEL="PROD"
           else
             LABEL=""
