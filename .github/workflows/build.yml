@@ -34,22 +34,22 @@ jobs:
         run: |
           echo "final output: ${{ env.result }}"
       
-      - name: Set labels based on commit messages
+      
+      - name: Read JSON File
+        id: read_json
         run: |
-          # Get the latest commit message
-          COMMIT_MESSAGE=$(git log -1 --pretty=%B)
-          echo $COMMIT_MESSAGE
-          # Check for keywords and set labels accordingly
-          if [[ $COMMIT_MESSAGE == *"[POC]"* ]]; then
-            LABEL="POC"
-          elif [[ $COMMIT_MESSAGE == *"[DEV]"* ]]; then
-            LABEL="DEV"
-          elif [[ $COMMIT_MESSAGE == *"[PROD]"* ]]; then
-            LABEL="PROD"
-          else
-            LABEL=""
-          fi
+          # Install jq to parse JSON
+          sudo apt-get install jq
 
-      - name: Echo environment
-        run: 
-          echo $LABEL
+          # Read the JSON file
+          ENV=$(jq -r '.env' config.json)
+          TYPE=$(jq -r '.type' config.json)
+
+          # Set the values to environment variables
+          echo "ENV=${ENV}" >> $GITHUB_ENV
+          echo "TYPE=${TYPE}" >> $GITHUB_ENV
+  
+      - name: Display Captured Info
+        run: |
+          echo "Environment: $ENV"
+          echo "Type: $TYPE"
