@@ -1,0 +1,33 @@
+name: Capture Environment Info
+
+on:
+  workflow_dispatch:
+    inputs:
+      celery:
+        description: 'Enter CELERY'
+        required: true
+      scheduler:
+        description: 'Enter SCHEDULER'
+        required: true
+      stage:
+        description: 'Enter STAGE (POC, DEV, STAGING, PRODUCTION)'
+        required: true
+
+jobs:
+  capture-info:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Capture Input Information
+        run: |
+          echo "CELERY=${{ github.event.inputs.celery }}" >> $GITHUB_ENV
+          echo "SCHEDULER=${{ github.event.inputs.scheduler }}" >> $GITHUB_ENV
+          echo "STAGE=${{ github.event.inputs.stage }}" >> $GITHUB_ENV
+
+      - name: Display Environment Info
+        run: |
+          echo "CELERY: $CELERY"
+          echo "SCHEDULER: $SCHEDULER"
+          echo "STAGE: $STAGE"
