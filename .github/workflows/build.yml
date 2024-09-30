@@ -25,7 +25,7 @@ jobs:
         id: run_script
         run: |
           ls
-          echo "run script..."
+          echo "run script"
           output=$(python3 _uselect.py "${{steps.changed-files.outputs.all_changed_and_modified_files}}")
           echo "output..."
           echo $output
