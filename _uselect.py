@@ -16,6 +16,6 @@ for e in items:
         res.append(e.split('/')[0])
 
 if not len(res):
-    print('global')
+    print('NO_BUILD')
 else:
-    print(list(set(res)))
+    print(','.join(list(set(res))))
