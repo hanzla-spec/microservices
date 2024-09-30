@@ -26,7 +26,7 @@ jobs:
         run: |
           ls
           echo "run script"
-          output=$(python3 _uselect.py "${{steps.changed-files.outputs.all_changed_and_modified_files}}")
+          output=$(python3 __app__.py "${{steps.changed-files.outputs.all_changed_and_modified_files}}")
           echo "output..."
           echo $output
           echo "result=$output" >> $GITHUB_ENV
