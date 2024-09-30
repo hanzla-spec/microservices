@@ -1,6 +1,9 @@
 name: Capture Environment Info
 
 on:
+  push:
+    branches:
+    - main
   workflow_dispatch:
     inputs:
       celery:
