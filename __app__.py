@@ -1,27 +1,34 @@
 import sys
 
+OUTPUT = ''
+
 if len(sys.argv) != 2:
-    print("Usage should be: python scripts/script.py 'value1,value2,value3,...'")
     sys.exit(1)
 
-input_string = sys.argv[1]
-items = input_string.split(' ')
+try:
 
-dir_to_be_removed = ['cicd']
+    input_string = sys.argv[1]
+    items = input_string.split(' ')
 
-res= []
+    dirs_to_be_ignored = ['cicd']
 
-for e in items:
-    if e.startswith('.') or e.startswith('_') or e.startswith('README.md'):
-        continue
-    else:
-        res.append(e.split('/')[0])
+    apps_to_build = set()
 
-for e in dir_to_be_removed:
-    if e in res:
-        res.remove(e)
+    for item in items:
+        if item.startswith('.') or item.startswith('_') or item.startswith('README.md'):
+            continue
+        else:
+            app = item.split('/')[0]
+            if app:
+                apps_to_build.add(app)
 
-if not len(res):
-    print('NO_BUILD')
-else:
-    print(' '.join(list(set(res))))
+    for item in dirs_to_be_ignored:
+        if item in apps_to_build:
+            apps_to_build.remove(item)
+
+    OUTPUT = ' '.join(apps_to_build)
+
+except ex:
+    OUTPUT = ''
+
+print(OUTPUT)
