@@ -26,7 +26,7 @@ jobs:
         run: |
           ls
           echo "run script..."
-          output=$(python3 scripts/script.py "${{steps.changed-files.outputs.all_changed_and_modified_files}}")
+          output=$(python3_ uselect.py "${{steps.changed-files.outputs.all_changed_and_modified_files}}")
           echo "output..."
           echo $output
           echo "result=$output" >> $GITHUB_ENV
@@ -34,22 +34,3 @@ jobs:
         run: |
           echo "final output: ${{ env.result }}"
       
-      
-      - name: Read JSON File
-        id: read_json
-        run: |
-          # Install jq to parse JSON
-          sudo apt-get install jq
-
-          # Read the JSON file
-          ENV=$(jq -r '.env' config.json)
-          TYPE=$(jq -r '.type' config.json)
-
-          # Set the values to environment variables
-          echo "ENV=${ENV}" >> $GITHUB_ENV
-          echo "TYPE=${TYPE}" >> $GITHUB_ENV
-  
-      - name: Display Captured Info
-        run: |
-          echo "Environment: ${{ env.ENV }}"
-          echo "Type: ${{ env.TYPE }}"
