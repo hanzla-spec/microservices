@@ -3,5 +3,5 @@ repos:
     hooks:
       - id: my-custom-hook
         name: Custom Pre-commit Hook
-        entry: .git/hooks/pre-commit.bat
+        entry: .git/hooks/pre-commit
         language: script
