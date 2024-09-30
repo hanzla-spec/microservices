@@ -1,0 +1,7 @@
+repos:
+  - repo: local
+    hooks:
+      - id: my-custom-hook
+        name: Custom Pre-commit Hook
+        entry: bash .git/hooks/pre-commit
+        language: script
