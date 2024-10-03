@@ -10,7 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        run: |
+          git clone https://github.com/hanzla-spec/cicd _work/cicd
 
       - name: Changed Files
         id: changed-files
