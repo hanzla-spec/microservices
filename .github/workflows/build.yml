@@ -7,16 +7,16 @@ on:
 
 jobs:
   check_changed_files:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
-      - name: Checkout code
-        run: |
-          git clone https://github.com/hanzla-spec/cicd _work/cicd
-
       - name: Changed Files
         id: changed-files
         uses: tj-actions/changed-files@v45.0.2
         
+      - name: Checkout code
+        run: |
+          git clone https://github.com/hanzla-spec/ci_cd
+
       # - name: Set up Python
       #   uses: actions/setup-python@v4
       #   with:
