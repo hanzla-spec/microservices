@@ -1,27 +1,31 @@
-name: Check Changed Files
+name: CI Workflow
 
 on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  get-changed-files:
+  check-changes:
     runs-on: self-hosted
+
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: tj-actions/checkout@v3
 
-      - name: Get changed files
+      - name: Get Changed Files
+        uses: tj-actions/changed-files@v21
         id: changed-files
-        run: |
-          # Get the list of changed files
-          git diff --name-only HEAD~1 HEAD > changed_files.txt
-          echo "Changed files:"
-          cat changed_files.txt
-          echo "::set-output name=files::$(cat changed_files.txt)"
 
-      - name: Use changed files
-        run: |
-          echo "The changed files are:"
-          echo "${{ steps.changed-files.outputs.files }}"
+      - name: Display Changed Files
+        run: echo "Changed files: ${{ steps.changed-files.outputs.files }}"
+
+      - name: Commit Changes
+        uses: tj-actions/commit-changes@v7
+        with:
+          commit_message: "Auto-commit changes"
+          author_name: "GitHub Actions"
+          author_email: "actions@github.com"
