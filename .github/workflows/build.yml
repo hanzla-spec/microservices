@@ -7,7 +7,7 @@ on:
 
 jobs:
   check_changed_files:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         run: |
@@ -17,21 +17,21 @@ jobs:
         id: changed-files
         uses: tj-actions/changed-files@v45.0.2
         
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.8'  # Specify the Python version you need
+      # - name: Set up Python
+      #   uses: actions/setup-python@v4
+      #   with:
+      #     python-version: '3.8'  # Specify the Python version you need
           
-      - name: Run Python script
-        id: run_script
-        run: |
-          ls
-          echo "run script"
+      # - name: Run Python script
+      #   id: run_script
+      #   run: |
+      #     ls
+      #     echo "run script"
           
-          output=$(python3 __app__.py "${{steps.changed-files.outputs.all_changed_and_modified_files}}")
-          echo "result=$output" >> $GITHUB_ENV
+      #     output=$(python3 __app__.py "${{steps.changed-files.outputs.all_changed_and_modified_files}}")
+      #     echo "result=$output" >> $GITHUB_ENV
       
       - name: Print the stored output
         run: |
-          echo "final output: ${{ env.result }}"
+          echo "final output: ${{steps.changed-files.outputs.all_changed_and_modified_files}}"
       
