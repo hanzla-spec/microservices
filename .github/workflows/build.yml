@@ -12,14 +12,8 @@ jobs:
   check-changes:
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Python 3.8
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.8'
-
-      - name: Step 2
-        uses: actions/checkout@v2.1.0
-        uses: jitterbit/get-changed-files@v1
+      - uses: actions/checkout@v2.1.0
+      - uses: jitterbit/get-changed-files@v1
         id: abc
         with:
           format: space-delimited
@@ -37,6 +31,11 @@ jobs:
           echo "${{ steps.abc.outputs.modified }}"
           echo "Added+Modified:"
           echo "${{ steps.abc.outputs.added_modified }}"
-          
+
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+
       - name: Run
         run: echo $(python3 scripts/script.py ${{ steps.changed-files.outputs.all_changed_files }})
