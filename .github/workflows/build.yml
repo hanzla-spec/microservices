@@ -11,7 +11,6 @@ on:
 jobs:
   check-changes:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: tj-actions/checkout@v3
@@ -21,13 +20,12 @@ jobs:
         id: changed-files
 
       - name: Display Changed Files
-        run: |
-          echo "Changed files: ${{ steps.changed-files.outputs.files }}"
+        run: echo "changed files = ${{ steps.changed-files.outputs.files }}"
 
       - name: Set up Python 3.8
         uses: actions/setup-python@v4
         with:
           python-version: '3.8'
       
-      -name: Run
+      - name: Run
         run: echo $(python3 scripts/script.py ${{ steps.changed-files.outputs.files }})

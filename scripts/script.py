@@ -1,7 +1,7 @@
 import sys
 
 if len(sys.argv) != 2:
-    print("Usage should be: python scripts/script.py 'value1,value2,value3,...'")
+    print("Usage should be: python scripts/script.py 'value1,value2,value3,....'")
     sys.exit(1)
 
 input_string = sys.argv[1]
