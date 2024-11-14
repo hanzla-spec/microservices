@@ -28,4 +28,4 @@ jobs:
           python-version: '3.8'
 
       - name: Run
-        run: echo $(python3 scripts/script.py $files)
+        run: echo $(python3 scripts/script.py ${{files}})
