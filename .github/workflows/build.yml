@@ -13,10 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: tj-actions/checkout@v3
+        uses: actions/checkout
 
       - name: Get Changed Files
-        uses: ttj-actions/changed-files@v45
+        uses:tj-actions/changed-files@v45
         id: changed-files
 
       - name: Display Changed Files
