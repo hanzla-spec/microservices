@@ -21,7 +21,8 @@ jobs:
         id: changed-files
 
       - name: Display Changed Files
-        run: echo "Changed files: ${{ steps.changed-files.outputs.files }}"
+        run: |
+          echo "Changed files: ${{ steps.changed-files.outputs.files }}"
 
       - name: Set up Python 3.8
         uses: actions/setup-python@v4
