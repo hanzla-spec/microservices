@@ -17,17 +17,14 @@ jobs:
         id: abc
         with:
           format: space-delimited
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
       - name: Printing
         run: |
           echo "All:"
           files="${{ steps.abc.outputs.all }}"  # Get the space-separated list
           files=$(echo "$files" | sed 's/ /,/g')  # Replace spaces with commas
           echo "Comma-separated files: $files"
-
-      - name: Set up Python 3.8
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.8'
-
-      - name: Run
-        run: echo $(python3 scripts/script.py "$files")
+          echo $(python3 scripts/script.py "$files")
