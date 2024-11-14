@@ -20,7 +20,7 @@ jobs:
       - name: Printing
         run: |
           echo "All:"
-          echo "${{ steps.abc.outputs.all }}"
+          echo files="${{ steps.abc.outputs.all }}" | sed 's/ /,/g'
 
       - name: Set up Python 3.8
         uses: actions/setup-python@v4
@@ -28,4 +28,4 @@ jobs:
           python-version: '3.8'
 
       - name: Run
-        run: echo $(python3 scripts/script.py ${{ steps.abc.outputs.all }})
+        run: echo $(python3 scripts/script.py $files)
