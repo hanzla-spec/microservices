@@ -16,7 +16,7 @@ jobs:
       - uses: jitterbit/get-changed-files@v1
         id: abc
         with:
-          format: space-delimited
+          format: comma-delimited
       - name: Printing
         run: |
           echo "All:"
