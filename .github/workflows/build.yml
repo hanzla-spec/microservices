@@ -16,11 +16,11 @@ jobs:
         uses: tj-actions/checkout@v3
 
       - name: Get Changed Files
-        uses: tj-actions/changed-files@v21
+        uses: ttj-actions/changed-files@v45
         id: changed-files
 
       - name: Display Changed Files
-        run: echo "changed files = ${{ steps.changed-files.outputs.files }}"
+        run: echo "changed files = ${{ steps.changed-files.outputs.all_changed_files }}"
 
       - name: Set up Python 3.8
         uses: actions/setup-python@v4
@@ -28,4 +28,4 @@ jobs:
           python-version: '3.8'
       
       - name: Run
-        run: echo $(python3 scripts/script.py ${{ steps.changed-files.outputs.files }})
+        run: echo $(python3 scripts/script.py ${{ steps.changed-files.outputs.all_changed_files }})
