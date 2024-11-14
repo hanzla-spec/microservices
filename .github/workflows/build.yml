@@ -25,6 +25,6 @@ jobs:
         run: |
           echo "All:"
           files="${{ steps.abc.outputs.all }}"  # Get the space-separated list
-          files=$(echo "$files" | sed 's/ /,/g')  # Replace spaces with commas
-          echo "Comma-separated files: $files"
-          echo $(python3 scripts/script.py $files)
+          # files=$(echo "$files" | sed 's/ /,/g')  # Replace spaces with commas
+          # echo "Comma-separated files: $files"
+          echo $(python3 scripts/script.py "${{ steps.abc.outputs.all }}")
