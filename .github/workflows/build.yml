@@ -21,16 +21,6 @@ jobs:
         run: |
           echo "All:"
           echo "${{ steps.abc.outputs.all }}"
-          echo "Added:"
-          echo "${{ steps.abc.outputs.added }}"
-          echo "Removed:"
-          echo "${{ steps.abc.outputs.removed }}"
-          echo "Renamed:"
-          echo "${{ steps.abc.outputs.renamed }}"
-          echo "Modified:"
-          echo "${{ steps.abc.outputs.modified }}"
-          echo "Added+Modified:"
-          echo "${{ steps.abc.outputs.added_modified }}"
 
       - name: Set up Python 3.8
         uses: actions/setup-python@v4
@@ -38,4 +28,4 @@ jobs:
           python-version: '3.8'
 
       - name: Run
-        run: echo $(python3 scripts/script.py ${{ steps.changed-files.outputs.all_changed_files }})
+        run: echo $(python3 scripts/script.py ${{ steps.abc.outputs.all }})
