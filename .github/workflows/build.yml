@@ -20,7 +20,9 @@ jobs:
       - name: Printing
         run: |
           echo "All:"
-          echo files="${{ steps.abc.outputs.all }}" | sed 's/ /,/g'
+          files="${{ steps.abc.outputs.all }}"  # Get the space-separated list
+          files=$(echo "$files" | sed 's/ /,/g')  # Replace spaces with commas
+          echo "Comma-separated files: $files"
 
       - name: Set up Python 3.8
         uses: actions/setup-python@v4
@@ -28,4 +30,4 @@ jobs:
           python-version: '3.8'
 
       - name: Run
-        run: echo $(python3 scripts/script.py ${{files}})
+        run: echo $(python3 scripts/script.py $files)
