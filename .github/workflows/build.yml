@@ -10,7 +10,7 @@ on:
 
 jobs:
   check-changes:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -23,9 +23,11 @@ jobs:
       - name: Display Changed Files
         run: echo "Changed files: ${{ steps.changed-files.outputs.files }}"
 
-      - name: Commit Changes
-        uses: tj-actions/commit-changes@v7
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v4
         with:
-          commit_message: "Auto-commit changes"
-          author_name: "GitHub Actions"
-          author_email: "actions@github.com"
+          python-version: '3.8'
+      
+      -name: Run
+       run: echo $(python3 scripts/script.py ${{ steps.changed-files.outputs.files }})
+        

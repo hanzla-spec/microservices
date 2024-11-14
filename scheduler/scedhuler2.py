@@ -1,1 +1,1 @@
-print('sch 2...')
+print('sch 2..')
