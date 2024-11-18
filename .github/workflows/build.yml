@@ -17,5 +17,7 @@ jobs:
           git checkout main
           git diff origin/main | Out-File -FilePath target.txt
           Get-Content target.txt
+
+          
         
 
