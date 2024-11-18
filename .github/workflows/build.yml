@@ -15,8 +15,8 @@ jobs:
           git clone https://github.com/hanzla-spec/microservices.git repo
           cd repo
           git checkout main
-          git diff --name-only origin/main | Out-File -FilePath target.txt
-          Get-Content target.txt
+          $changed_files = git diff --name-only origin/main
+          echo "$changed_files"
 
           
         
