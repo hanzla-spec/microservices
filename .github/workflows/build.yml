@@ -27,6 +27,6 @@ jobs:
             Write-Host "target.txt not found"
           }
         
-      - name: clea
+      - name: clear
         run: rmdir microservices
 
