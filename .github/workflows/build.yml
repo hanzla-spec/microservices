@@ -16,17 +16,5 @@ jobs:
           cd microservices
           git checkout main
           git diff --name-only origin/main >> target.txt
-
-          # Ensure the file exists
-          if (Test-Path 'target.txt') {
-            # Read and display the contents of the file
-            $CONTENTS = Get-Content 'target.txt' -Raw
-            Write-Host "Contents of target.txt: $CONTENTS"
-          }
-          else {
-            Write-Host "target.txt not found"
-          }
         
-      - name: clear
-        run: rmdir microservices
 
