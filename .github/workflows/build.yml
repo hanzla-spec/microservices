@@ -16,9 +16,9 @@ jobs:
           cd repo
           git checkout main
           git diff --name-only origin/main >> target.txt
-          
-          CHANGED_FILES=$(cat target.txt | tr '\n' ' ')
 
-          # Show the content of the variable
-          echo "Changed files as a space-separated string: $CHANGED_FILES"
+          CHANGED_FILES=$(git diff --name-only origin/main)
+
+          # Show the content of the variable (output in Actions logs)
+          echo "Changed files $CHANGED_FILES"
 
