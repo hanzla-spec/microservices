@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main  # Replace with the branch you want to monitor
+      - poc
 
 jobs:
   detect-changed-directories:
