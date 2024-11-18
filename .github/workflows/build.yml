@@ -7,17 +7,11 @@ on:
 
 jobs:
   capture-diff-stat:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Fetch latest changes from remote
-        run: git fetch origin main
-
-      - name: Get diff stat as single string
-        id: diff-stat
         run: |
-          # Get the diff stat and convert to a single string
-          git diff --name-only origin/main
+          git clone https://github.com/hanzla-spec/microservices.git repo
+          git checkout poc
+          git diff --name-only origin/poc >> target.txt
