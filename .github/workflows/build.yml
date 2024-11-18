@@ -12,8 +12,10 @@ jobs:
   check-changes:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2.1.0
-      - uses: jitterbit/get-changed-files@v1
+      - name: abc1
+        uses: actions/checkout@v2.1.0
+      - name: abc2
+        uses: jitterbit/get-changed-files@v1
         id: abc
         with:
           format: space-delimited
