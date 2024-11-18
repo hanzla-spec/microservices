@@ -20,7 +20,9 @@ jobs:
           CURRENT_COMMIT=${{ github.sha }}
 
           # Run the git diff command and store the changed files in a space-separated variable
-          CHANGED_FILES=$(git diff --name-only $BEFORE_COMMIT $CURRENT_COMMIT | tr '\n' ' ')
+          git diff --name-only $BEFORE_COMMIT $CURRENT_COMMIT > target.txt
+
+          output=$(cat target.txt | tr '\n' ' ')
 
           # Output the changed files to the log
-          echo "Changed files: $CHANGED_FILES"
+          echo "$output"
