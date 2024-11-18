@@ -15,6 +15,7 @@ jobs:
           git clone https://github.com/hanzla-spec/microservices.git repo
           cd repo
           git checkout main
-          git diff --name-only origin/main >> target.txt
+          git diff origin/main | Out-File -FilePath target.txt
+          Get-Content target.txt
         
 
