@@ -20,8 +20,3 @@ jobs:
           git fetch origin main
           CHANGED_FILES=$(git diff --name-only origin/main)
           echo "Changed files: $CHANGED_FILES"
-          echo "::set-output name=changed_files::$CHANGED_FILES"
-
-      - name: Display changed files
-        run: echo "The following files were changed ${{ steps.detect-changed-files.outputs.changed_files }}"
-
