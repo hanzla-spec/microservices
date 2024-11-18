@@ -20,5 +20,4 @@ jobs:
         id: diff-stat
         run: |
           # Get the diff stat and convert to a single string
-          DIFF_STAT=$(git diff --name-only origin/main | tr '\n' ' ')
-          echo "$DIFF_STAT"
+          git diff --name-only origin/main
