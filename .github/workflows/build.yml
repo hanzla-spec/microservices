@@ -1,23 +1,26 @@
-name: Get Diff as Single String
+name: Capture Git Diff to Space-Separated Variable
 
 on:
   push:
     branches:
-      - main  # You can change this to the branch you're interested in
+      - main
 
 jobs:
-  capture-diff-stat:
-    runs-on: self-hosted
+  capture-diff:
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Capture Git Diff to Space-Separated Variable
         run: |
-          git clone https://github.com/hanzla-spec/microservices.git repo
-          cd repo
-          git checkout main
-          $changed_files = git diff --name-only ${{ github.event.before }} ${{ github.sha }}
-          echo "$changed_files"
+          # Get the commit hashes for before and current commit
+          BEFORE_COMMIT=${{ github.event.before }}
+          CURRENT_COMMIT=${{ github.sha }}
 
-          
-        
+          # Run the git diff command and store the changed files in a space-separated variable
+          CHANGED_FILES=$(git diff --name-only $BEFORE_COMMIT $CURRENT_COMMIT | tr '\n' ' ')
 
+          # Output the changed files to the log
+          echo "Changed files: $CHANGED_FILES"
