@@ -1,1 +1,1 @@
-print('hello scripts d.')
+print('hello scripts.')
