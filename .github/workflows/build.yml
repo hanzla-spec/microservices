@@ -1,22 +1,47 @@
-name: CI Workflow
+name: Detect Changed Directories on Push
 
 on:
   push:
     branches:
-      - main
-  pull_request:
-    branches:
-      - main
+      - main  # Replace with the branch you want to monitor
 
 jobs:
-  detect-changed-files:
+  detect-changed-directories:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Ensure full history is fetched
 
-      - name: Get changed files
+      - name: Fetch latest changes from remote
+        run: git fetch origin main  # Ensure we're comparing against the latest main
+
+      - name: Get changed directories
+        id: changed-directories
         run: |
-          git fetch origin main
+          # Get the changed files and extract unique directories
           CHANGED_FILES=$(git diff --name-only origin/main)
-          echo "Changed files: $CHANGED_FILES"
+          CHANGED_DIRECTORIES=$(echo "$CHANGED_FILES" | grep '/.*' | cut -d'/' -f1 | sort -u)
+          
+          if [ -z "$CHANGED_DIRECTORIES" ]; then
+            echo "No directories changed."
+          else
+            echo "Changed directories: $CHANGED_DIRECTORIES"
+          fi
+
+          # Save the list of changed directories to use in future steps
+          echo "::set-output name=changed_directories::$CHANGED_DIRECTORIES"
+
+      - name: Display changed directories
+        run: |
+          echo "The following directories were changed: ${{ steps.changed-directories.outputs.changed_directories }}"
+
+      - name: Run frontend tests if frontend directory changed
+        if: contains(steps.changed-directories.outputs.changed_directories, 'frontend')
+        run: echo "Running frontend tests..."
+
+      - name: Run backend tests if backend directory changed
+        if: contains(steps.changed-directories.outputs.changed_directories, 'backend')
+        run: echo "Running backend tests..."

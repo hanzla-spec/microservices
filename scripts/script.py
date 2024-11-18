@@ -1,7 +1,7 @@
 import sys
 
 if len(sys.argv) != 3:
-    print("Usage should be:python scripts/script.py 'branch_ref value1,value2,value3,....'")
+    print("Usage should be:python scripts/script.py 'branch_ref value1,value2,value3,...'")
     sys.exit(1)
 
 
