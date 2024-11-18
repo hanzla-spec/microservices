@@ -15,7 +15,7 @@ jobs:
           git clone https://github.com/hanzla-spec/microservices.git repo
           cd repo
           git checkout main
-          $changed_files = git diff --name-only origin/main
+          $changed_files = git diff --name-only ${{ github.event.before }} ${{ github.sha }}
           echo "$changed_files"
 
           
