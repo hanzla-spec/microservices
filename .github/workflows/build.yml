@@ -14,19 +14,13 @@ jobs:
     steps:
       - name: abc1
         uses: actions/checkout@v2.1.0
-      - name: abc2
-        uses: jitterbit/get-changed-files@v1
-        id: abc
-        with:
-          format: space-delimited
       - name: Set up Python 3.8
         uses: actions/setup-python@v4
         with:
           python-version: '3.8'
       - name: Printing
         run: |
-          echo "All:"
-          files="${{ steps.abc.outputs.all }}"  # Get the space-separated list
-          # files=$(echo "$files" | sed 's/ /,/g')  # Replace spaces with commas
-          # echo "Comma-separated files: $files"
+          git diff --name-only origin/${{ github.ref }}...HEAD > changedfiles.txt
+          cat changedfiles.txt
+
           echo $(python3 scripts/script.py "${{ github.ref }}" "${{ steps.abc.outputs.all }}")
