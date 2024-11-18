@@ -17,8 +17,16 @@ jobs:
           git checkout main
           git diff --name-only origin/main >> target.txt
 
-          $CHANGED_FILES = git diff --name-only origin/main
-
-          # Show the content of the variable in the GitHub Actions logs
-          Write-Host "Changed files: $CHANGED_FILES"
+          # Ensure the file exists
+          if (Test-Path 'target.txt') {
+            # Read and display the contents of the file
+            $CONTENTS = Get-Content 'target.txt' -Raw
+            Write-Host "Contents of target.txt: $CONTENTS"
+          }
+          else {
+            Write-Host "target.txt not found"
+          }
+        
+      - name: clea
+        run: rmdir microservices
 
