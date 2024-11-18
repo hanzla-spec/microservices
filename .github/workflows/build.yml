@@ -9,18 +9,19 @@ on:
       - main
 
 jobs:
-  check-changes:
+  detect-changed-files:
     runs-on: ubuntu-latest
     steps:
-      - name: abc1
-        uses: actions/checkout@v2.1.0
-      - name: Set up Python 3.8
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.8'
-      - name: Printing
-        run: |
-          git diff --name-only origin/${{ github.ref }}...HEAD > changedfiles.txt
-          cat changedfiles.txt
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-          echo $(python3 scripts/script.py "${{ github.ref }}" "${{ steps.abc.outputs.all }}")
+      - name: Get changed files
+        run: |
+          git fetch origin main
+          CHANGED_FILES=$(git diff --name-only origin/main)
+          echo "Changed files: $CHANGED_FILES"
+          echo "::set-output name=changed_files::$CHANGED_FILES"
+
+      - name: Display changed files
+        run: echo "The following files were changed ${{ steps.detect-changed-files.outputs.changed_files }}"
+
