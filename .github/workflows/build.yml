@@ -14,5 +14,5 @@ jobs:
         run: |
           git clone https://github.com/hanzla-spec/microservices.git
           cd repo
-          git checkout poc
+          git checkout main
           git diff --name-only origin/poc >> target.txt
